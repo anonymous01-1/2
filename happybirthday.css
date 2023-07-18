@@ -1,0 +1,166 @@
+body {
+    margin: 0;
+    background: #020202;
+    cursor: crosshair;
+  }
+  canvas{display:block}
+  h1 {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-family: "Source Sans Pro";
+    font-size: 5em;
+    font-weight: 900;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  :root {
+    --color-chocolate: #864313;
+    --color-cream: #ffffcc;
+    --color-flame: #E29822;
+    --candle-height: 10em;
+    --candle-width: 2.5em;
+    --candle-distance: calc(var(--candle-width) + 1em);
+    --candle-color: #ff0000;
+    --candle-list: #77DD77, #FF6961, #FFB347, #779ECB, #B19CD9, #A5D3CA, #C0F7FE;
+    --cake-color: #6f2f04;
+    --cake-height: 30em;
+    --cake-layers: 3;
+    padding-bottom: 20%;
+  }
+  
+  @function layer-size($position) {
+    @return calc((var(--cake-height) / 2) * $position / var(--cake-layers));
+  }
+  
+  @keyframes flames {
+    0% {
+      height: calc(var(--candle-width) - 0.3em);
+      transform: rotate(0.5deg);
+      opacity: 0.8;
+    }
+    100% {
+      height: var(--candle-width);
+      transform: rotate(-0.5deg);
+      border-radius: 50% / 30%;
+      border-top-right-radius: 50% 60%;
+      border-top-left-radius: 50% 60%;
+      opacity: 1;
+    }
+  }
+  
+  @keyframes candles {
+    0% {
+      height: var(--candle-height);
+      border-radius: 50% / 5%;
+    }
+    100% {
+      height: 2em;
+      border-radius: 50% / 25%;
+    }
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0));
+    color: var(--color-chocolate);
+    font-size: 12px;
+  }
+  
+  a {
+    color: inherit;
+    background: var(--color-cream);
+    text-decoration: none;
+  }
+  
+  .cake {
+    height: var(--cake-height);
+    width: var(--cake-height);
+    margin: var(--candle-height) auto 0;
+    position: relative;
+    border-radius: 100% / 50%;
+    background: var(--cake-color);
+    border-bottom: 0.25em solid #581f03;
+  }
+  
+  .cake::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: calc(var(--cake-height) / 2);
+    border-radius: 50%;
+    background: var(--cake-color);
+    border-bottom: 0.5em solid #581f03;
+    z-index: 10;
+  }
+  
+  .cake::after {
+    content: "";
+    position: absolute;
+    top: calc(var(--cake-height) / var(--cake-layers) * 1 / 2);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: calc(var(--cake-height) / 2);
+    border-radius: 50%;
+    border-top-right-radius: 25%;
+    border-top-left-radius: 25%;
+    background: #864313;
+    box-shadow: 0 calc(var(--cake-height) / 2 / 2) 0 var(--color-cream),
+      0 calc(var(--cake-height) / 2) 0 #864313;
+  }
+  
+  .candles {
+    z-index: 20;
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    height: var(--candle-height);
+    width: var(--candle-width);
+    position:absolute;
+    bottom: calc(var(--cake-height) - var(--candle-height) + 2.5em);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 50% / 5%;
+    animation: candles 10s 5s 2 alternate;
+    background: var(--candle-color);
+  }
+
+  .candles::after {
+    content: "";
+    position: absolute;
+    top: calc(-var(--candle-width) * 4 / 5);
+    right: 0;
+    left: 0;
+    margin: auto;
+    border-radius: 50% / 40%;
+    border-top-right-radius: 50% 60%;
+    border-top-left-radius: 50% 60%;
+    background: var(--color-flame);
+    height: var(--candle-width);
+    width: calc(var(--candle-width) - 1em);
+    animation: flames 0.75s infinite alternate;
+    box-shadow: 0 0 0 1px lighten(var(--color-flame), 10%),
+      -var(--candle-distance) 5em 1px 0 var(--color-flame),
+      var(--candle-distance) 5em 1px 0 var(--color-flame),
+      -calc(var(--candle-distance) * 2) -2.5em 1px 0 var(--color-flame),
+      calc(var(--candle-distance) * 2) -2.5em 1px 0 var(--color-flame),
+      -calc(var(--candle-distance) * 3) 2em 1px 0 var(--color-flame),
+      calc(var(--candle-distance) * 3) 2em 1px 0 var(--color-flame);
+  }
+  
+  
+  
+  
